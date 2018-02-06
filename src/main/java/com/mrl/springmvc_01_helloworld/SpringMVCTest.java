@@ -36,6 +36,18 @@ public class SpringMVCTest {
 	/**
 	 * @param id
 	 *由@ModelAttribute  标记的方法会在每个目标方法执行之前被springmvc调用
+	 *
+	 *1.调用@ModelAttribute注解修饰的方法，实际上把@ModelAttribute方法中Map中的数据放在了implicitModel中。
+	  2.解析请求处理器的目标参数，实际上改目标参数来自于WebDataBinder的target属性
+	  		a。创建WebDataBinder对象 
+	  		           确定objectname属性 ：若传入的attrName属性值为空串，则objectname为类名第一个字母小写，若目标方法 的pojo属性使用了@ModelAttribute修饰，则attrName即为@ModelAttribute的value属性值
+	  		           确定target属性：在implicitModel中查找attrName对应的属性值，若存在，返回。若不存在，则验证当前Handdler是否使用了@SessionAttributes进行修饰，若使用了，则尝试从session获取attrName对应的属性值，若session中没有对应的属性值，则抛出异常。
+	  						  若handler没有使用SessionAttributes进行修饰，或者SessionAttributes没有使用value值指定的key和attrName相匹配，则通过反射创建POJO对象
+	  		b.springmvc把表单 的请求参数赋给了WebDataBinder的target对应的属性
+	  		c.springmvc会把webdatabinder的name和target给到implicitModel
+	  		d。把webdatabinder的target作为参数传递给目标方法的入参
+	  3.
+	 *
 	 */
 	
 	@ModelAttribute
