@@ -5,7 +5,7 @@
 	<artifactId>springmvc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	
+
 	<properties>
 		<spring-version>4.2.5.RELEASE</spring-version>
 		<junit-version>4.11</junit-version>
@@ -33,7 +33,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
-			 <scope>provided</scope> 
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- spring -->
@@ -97,6 +97,21 @@
 			<version>${spring-version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/taglibs/standard -->
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -111,7 +126,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-			
+
 			<!-- Tomcat运行插件 -->
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
@@ -125,7 +140,7 @@
 					<server>tomcat7</server>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.zeroturnaround</groupId>
 				<artifactId>jrebel-maven-plugin</artifactId>
@@ -143,9 +158,9 @@
 					<rebelXmlDirectory>${basedir}/src/main/resources</rebelXmlDirectory>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
-	
-	
+
+
 </project>
