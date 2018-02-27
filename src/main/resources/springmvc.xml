@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
 	<!-- 自动扫描的包 -->
-	<context:component-scan base-package="com.mrl.springmvc_02_crud_rest"></context:component-scan>
+	<context:component-scan base-package="com.mrl"></context:component-scan>
 
 	<!-- 视图解析器 -->
 	<!-- 如何把handler 方法解析为物理视图 -->
