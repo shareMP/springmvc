@@ -17,7 +17,7 @@ public class User {
 	private String email;
 	private int age;
 	
-//	private Address address;
+	private Address address;
 
 	public String getUsername() {
 		return username;
@@ -51,13 +51,13 @@ public class User {
 		this.age = age;
 	}
 
-//	public Address getAddress() {
-//		return address;
-//	}
-//
-//	public void setAddress(Address address) {
-//		this.address = address;
-//	}
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	
 
@@ -69,14 +69,16 @@ public class User {
 		this.age = age;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", age="
-				+ age + "]";
-	}
+	
 
 	
-	public User(Integer id, String username, String password, String email, int age) {
+	@Override
+    public String toString() {
+        return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", age="
+                + age + ", address=" + address + "]";
+    }
+
+    public User(Integer id, String username, String password, String email, int age) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -84,8 +86,20 @@ public class User {
 		this.email = email;
 		this.age = age;
 	}
+	
+	
 
-	public User() {
+	/*public User(Integer id, String username, String password, String email, int age, Address address) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.age = age;
+        this.address = address;
+    }*/
+
+    public User() {
 		super();
 	}
 	

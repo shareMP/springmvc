@@ -31,7 +31,51 @@ import org.springframework.web.servlet.ModelAndView;
 public class SpringMVCTest {
 
 	private static final String SUCCESS = "success";
+	
+	@RequestMapping("/testRedircet")
+	public String testRedircet(){
+	    System.out.println("testRedircet");
+	    return "redirect:/main.jsp";
+	}
+	
+	@RequestMapping("/testView")
+	public String testView(){
+	    System.err.println("testView");
+	    return "helloView";
+	}
+	
+	@RequestMapping("/testViewAndViewResolver")
+	public String testViewAndViewResolver(){
+	    System.out.println("testViewAndViewResolver");
+	    return SUCCESS;
+	}
+	
+	
+	/**
+	 *@ModelAttribute 也可以修饰目标方法POJO类型的入参,其value属性值：
+	 *     1）在implicitModel中查找对应的对象，存在，则会直接传入到目标方法的入参中。
+	 *     2）以value为key，pojo对象为value存入request。
+	 * 
+	 * */
+	
 
+	
+	/**
+	 * SpringMVC确定目标方法POJO类型入参的过程
+	 * 1.确定一个 Key：若目标方法的pojo类型的参数木有使用@ModelAttribute修饰，则key为pojo类名第一个字母的小写
+	 *             若目标方法的pojo类型的参数使用@ModelAttribute修饰，则key为@ModelAttribute注解的value属性值。
+	 * 
+	 * 2.在implicitModel查找key对应的对象，若存在，则作为入参传入,若在@ModelAttribute标记的方法中，在Map中保存过，且key和1确定的一致，则会获取到。
+	 * 
+	 * 3.若implicitModel不存在key对应的对应，则检查当前的handler是否使用SessionAttributes注解修饰
+	 *     若使用了，且SessionAttributes注解的value属性值中包含了key，则会从HttpSession中获取key对应的value值，
+	 *     若存在，则作为入参传入 ，不存在，抛出异常。
+	 * 
+	 * 4.若前的handler没有使用SessionAttributes注解，或者不包含对应的key，则会通过反射创建pojo类型的参数，传入目标方法、
+	 * 
+	 * 5.Springmvc会把key和pojo类型的对象保存到implicitModel中，进而会保存到request中。
+	 * */
+	
 	
 	/**
 	 * @param id
@@ -55,7 +99,7 @@ public class SpringMVCTest {
 		if(id != null){
 			//模拟从数据库中获取对象
 			User user = new User(1, "tom","123","tom@gmail.com",20);
-			map.put("user", user);
+			map.put("abc", user);
 			System.out.println("从数据库中获取一个对象");
 		}
 	}
@@ -68,7 +112,7 @@ public class SpringMVCTest {
 	 * springmvc帮我们做的是在调用目标方法之前，调用@ModelAttribute修饰的方法，把表单数据填充进去，然后将对象传入目标方法
 	 */
 	@RequestMapping("/testModelAttribute")
-	public String testModelAttribute(User user){
+	public String testModelAttribute(@ModelAttribute("abc") User user){
 		System.out.println("修改："+user);
 		return SUCCESS;
 	}

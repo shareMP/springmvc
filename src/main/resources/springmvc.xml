@@ -16,6 +16,26 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
+	<!-- 配置视图解析器 BeanNameViewResolver 使用视图的名字来解析视图 
+		通过order属性定义视图的优先级，order值越小，视图解析器的优先级越高
+	-->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="100"></property>
+	</bean>
+	
+	<!-- 配置直接转发的页面 
+		直接响应转发的页面，无需经过handler的方法
+		
+	-->
+	 <mvc:view-controller path="/success" view-name="success"/> 
+	
+	<!-- 配置国际化资源文件 -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="i18n"></property>
+	</bean>
+	
+	
+	
 	<!-- 
 		mvc:default-servlet-handler/> 将在 SpringMVC 上下文中定义一个
 		DefaultServletHttpRequestHandler，它会对进入 DispatcherServlet 的
@@ -24,6 +44,7 @@
 		DispatcherServlet 继续处理
 	 -->
 	<mvc:default-servlet-handler/>
+	
 	<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
 	
 	<!-- 配置ConvertionService -->
