@@ -45,7 +45,7 @@
 	 -->
 	<mvc:default-servlet-handler/>
 	
-	<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+	<mvc:annotation-driven></mvc:annotation-driven>
 	
 	<!-- 配置ConvertionService -->
 	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
@@ -56,4 +56,24 @@
 		</property>
 	</bean>
 	
+	<!-- 配置文件上传 MutipartResolver -->
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<property name="defaultEncoding" value="UTF-8"></property>
+			<property name="maxUploadSize" value="1024100"></property>
+		</bean>
+		
+		<!-- 自定义拦截器 -->
+		<mvc:interceptors>
+			<bean class="com.mrl.interceptors.FirstInterceptor"></bean>
+			
+			<!-- 可以配置拦截器作用(不作用)的路径 -->
+			<mvc:interceptor>
+				<mvc:mapping path="/crud/emps"/>
+				<bean class="com.mrl.interceptors.SecondInterceptor">
+				</bean>
+			</mvc:interceptor>
+			<!-- <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"></bean> -->
+		</mvc:interceptors>
+		
+		
 </beans>
